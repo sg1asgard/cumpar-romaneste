@@ -1,16 +1,15 @@
 <script setup>
-import { ref, reactive, onMounted, watch } from 'vue'
+import { ref, reactive, onMounted, watch, computed } from 'vue'
 import { apiCalls } from '@/utilities/apiCalls.js'
 import NavBar from '@/components/shared/NavBar.vue'
 import FooterNav from '@/components/shared/FooterNav.vue'
 import PageHeader from '@/components/shared/PageHeader.vue'
 import { faker } from '@faker-js/faker'
 
-// Faker.JS
 let randomCompany = faker.company.name()
 let randomProduct = faker.commerce.product()
 
-let entries = ref()
+let entries = ref([])
 const generateEntries = () => {
   entries.value = []
   for (let i = 0; i < 100; i++) {
@@ -21,41 +20,19 @@ const generateEntries = () => {
   }
 }
 
-// init const
-let data = ref()
-let searchTerm = ref('')
-
-// get json placeholder data
-// Get Profile ID
-const getFakeJson = async () => {
-  searchTerm.value = ''
-  try {
-    const response = await apiCalls.getTestData()
-    // Check if the user has a Resume
-    if (response.status === 200) {
-      data.value = response.data
-      generateEntries()
-    }
-
-    return true
-  } catch (error) {
-    return error
-  }
-}
-
-const filterData = () => {
-  let search = searchTerm.value
-  entries.value = entries.value.filter((produs) => {
-    return produs.product_name.toLowerCase().includes(search.toLowerCase()) || produs.company_name.toLowerCase().includes(search.toLowerCase())
-  })
-}
-
 onMounted(() => {
-  getFakeJson()
+  generateEntries()
 })
 
-watch(searchTerm, () => {
-  filterData()
+const searchTerm = ref('')
+
+const filteredEntries = computed(() => {
+  let search = searchTerm.value
+  return entries.value.filter(
+    (produs) =>
+      produs.product_name.toLowerCase().includes(search.toLowerCase()) ||
+      produs.company_name.toLowerCase().includes(search.toLowerCase())
+  )
 })
 </script>
 
@@ -82,7 +59,7 @@ watch(searchTerm, () => {
               aria-describedby="buton-cauta-rapid"
             />
             <button
-              @click="getFakeJson()"
+              @click="generateEntries()"
               class="btn btn-primary btn-lg text-capitalize"
               type="button"
               id="buton-cauta-rapid"
@@ -100,9 +77,8 @@ watch(searchTerm, () => {
         </div>
       </div>
 
-
-      <div v-if="data" class="search-results">
-        <dl v-for="(produs, index) in entries" :key="index">
+      <div class="search-results">
+        <dl v-for="(produs, index) in filteredEntries" :key="index">
           <dt>{{ produs.product_name }}</dt>
           <dd>{{ produs.company_name }}</dd>
         </dl>
