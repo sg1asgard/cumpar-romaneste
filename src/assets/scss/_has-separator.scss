@@ -1,0 +1,10 @@
+.has-separator {
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
