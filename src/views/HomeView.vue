@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, onMounted, computed } from 'vue'
+import { ref, reactive, onMounted, watch } from 'vue'
 import { apiCalls } from '@/utilities/apiCalls.js'
 import NavBar from '@/components/shared/NavBar.vue'
 import FooterNav from '@/components/shared/FooterNav.vue'
@@ -23,7 +23,7 @@ const generateEntries = () => {
 
 // init const
 let data = ref()
-let searchTerm = ref()
+let searchTerm = ref('')
 
 // get json placeholder data
 // Get Profile ID
@@ -34,7 +34,6 @@ const getFakeJson = async () => {
     // Check if the user has a Resume
     if (response.status === 200) {
       data.value = response.data
-      console.log('fake data', data.value)
       generateEntries()
     }
 
@@ -44,14 +43,19 @@ const getFakeJson = async () => {
   }
 }
 
-const filterData = (searchTerm) => {
+const filterData = () => {
+  let search = searchTerm.value
   entries.value = entries.value.filter((produs) => {
-    return produs.product_name.toLowerCase().includes(searchTerm.toLowerCase())
+    return produs.product_name.toLowerCase().includes(search.toLowerCase()) || produs.company_name.toLowerCase().includes(search.toLowerCase())
   })
 }
 
 onMounted(() => {
   getFakeJson()
+})
+
+watch(searchTerm, () => {
+  filterData()
 })
 </script>
 
@@ -71,7 +75,6 @@ onMounted(() => {
           <div class="input-group mb-3">
             <input
               v-model="searchTerm"
-              @keyup="filterData(searchTerm)"
               type="text"
               class="form-control form-control-lg"
               placeholder="ex: miere lapte Tulcea"
@@ -87,6 +90,8 @@ onMounted(() => {
               reseteaza cautarea
             </button>
           </div>
+
+          {{ searchTerm }}
 
           <div id="ajutorAautareRapida" class="form-text fs-5">
             Poti sa cauti dupa numele de producator, produs, locatie sau orice
