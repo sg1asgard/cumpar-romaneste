@@ -77,13 +77,29 @@ const filteredEntries = computed(() => {
         </div>
       </div>
 
-      <div class="search-results">
-        <dl v-for="(produs, index) in filteredEntries" :key="index">
-          <dt>{{ produs.product_name }}</dt>
-          <dd>{{ produs.company_name }}</dd>
-        </dl>
+      <div class="search-results d-flex flex-wrap">
+        <div
+          v-for="(produs, index) in filteredEntries"
+          :key="index"
+          class="col-md-3"
+        >
+          <dl class="p-3 mx-2 search-results__items">
+            <dt>{{ produs.product_name }}</dt>
+            <dd>{{ produs.company_name }}</dd>
+          </dl>
+        </div>
       </div>
     </main>
     <FooterNav />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.search-results {
+  margin: 0px -8px;
+  &__items {
+    border: 1px solid $gray-700;
+    border-radius: $res-border-radius-m;
+  }
+}
+</style>
