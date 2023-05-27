@@ -6,7 +6,8 @@ export const apiCalls = {
   getTestData() {
     console.log('called')
     // Get User Me
-    return axios.get(`${import.meta.env.VITE_BASE_API_URL}${Queries.fakeData.get}`)
-  },
-
+    return axios.get(
+      `${import.meta.env.VITE_BASE_API_URL}${Queries.fakeData.get}`
+    )
+  }
 }

@@ -1,47 +1,58 @@
 <script setup>
-import { ref, onMounted, computed } from "vue";
-import { apiCalls } from "@/utilities/apiCalls.js";
-import NavBar from "@/components/shared/NavBar.vue";
-import FooterNav from "@/components/shared/FooterNav.vue";
-import PageHeader from "@/components/shared/PageHeader.vue";
+import { ref, reactive, onMounted, computed } from 'vue'
+import { apiCalls } from '@/utilities/apiCalls.js'
+import NavBar from '@/components/shared/NavBar.vue'
+import FooterNav from '@/components/shared/FooterNav.vue'
+import PageHeader from '@/components/shared/PageHeader.vue'
+import { faker } from '@faker-js/faker'
+
+// Faker.JS
+let randomCompany = faker.company.name()
+let randomProduct = faker.commerce.product()
+
+let entries = ref()
+const generateEntries = () => {
+  entries.value = []
+  for (let i = 0; i < 100; i++) {
+    entries.value.push({
+      product_name: faker.commerce.product(),
+      company_name: faker.company.name()
+    })
+  }
+}
 
 // init const
-let data = ref();
-let searchTerm = ref();
+let data = ref()
+let searchTerm = ref()
 
 // get json placeholder data
 // Get Profile ID
 const getFakeJson = async () => {
-  searchTerm.value = '';
+  searchTerm.value = ''
   try {
-    const response = await apiCalls.getTestData();
+    const response = await apiCalls.getTestData()
     // Check if the user has a Resume
     if (response.status === 200) {
-      data.value = response.data;
-      console.log("fake data", data.value);
+      data.value = response.data
+      console.log('fake data', data.value)
+      generateEntries()
     }
 
-    return true;
+    return true
   } catch (error) {
-    return error;
+    return error
   }
-};
+}
 
 const filterData = (searchTerm) => {
-  data.value = data.value.filter((produs) => {
-    return produs.title.toLowerCase().includes(searchTerm.toLowerCase());
-  });
-};
-
-const dude = computed(() => {
-  data.value = data.value.filter((produs) => {
-    return produs.title.toLowerCase().includes(searchTerm.toLowerCase());
-  });
-});
+  entries.value = entries.value.filter((produs) => {
+    return produs.product_name.toLowerCase().includes(searchTerm.toLowerCase())
+  })
+}
 
 onMounted(() => {
-  getFakeJson();
-});
+  getFakeJson()
+})
 </script>
 
 <template>
@@ -84,10 +95,11 @@ onMounted(() => {
         </div>
       </div>
 
+
       <div v-if="data" class="search-results">
-        <dl v-for="(produs, index) in data" :key="index">
-          <dt>id: {{ produs.id }}</dt>
-          <dd>{{ produs.title }}</dd>
+        <dl v-for="(produs, index) in entries" :key="index">
+          <dt>{{ produs.product_name }}</dt>
+          <dd>{{ produs.company_name }}</dd>
         </dl>
       </div>
     </main>

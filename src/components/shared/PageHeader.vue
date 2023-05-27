@@ -2,8 +2,8 @@
 const props = defineProps({
   title: String,
   subtitle: String,
-  required: true,
-});
+  required: true
+})
 </script>
 <template>
   <h1 class="fs-1">{{ props?.title }}</h1>
