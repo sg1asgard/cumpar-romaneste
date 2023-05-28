@@ -9,7 +9,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <span :class="`tag tag-${tag_type} py-1 px-2 rounded-2`"><slot></slot></span>
+  <span :class="`tag tag-${tag_type} py-1 px-2 rounded-2 text-capitalize`"><slot></slot></span>
 </template>
 
 <style lang="scss" scoped>
@@ -19,7 +19,7 @@ const props = defineProps({
     font-weight: bold;
   }
   &-desfacere {
-    background-color: lighten($color: $primary, $amount: 52);
+    background-color: lighten($color: #FF7F50, $amount: 26);
     font-weight: bold;
   }
 }

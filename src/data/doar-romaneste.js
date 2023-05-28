@@ -12,8 +12,8 @@ const doarRomaneste = {
     },
     {
       denumire: 'iaurt',
-      brand: 'Olymp',
-      url: 'https://www.apidava.ro/'
+      brand: 'Olympus',
+      url: 'https://www.iaurtgrecesc.ro/'
     }
   ],
   desfacere: [
