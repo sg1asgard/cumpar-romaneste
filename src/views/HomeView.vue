@@ -85,6 +85,7 @@ const filteredEntries = computed(() => {
         </div>
       </div>
 
+      <h3>Produse</h3>
       <div class="search-results d-flex flex-wrap">
         <div
           v-for="(produs, index) in filteredEntries"
@@ -97,24 +98,33 @@ const filteredEntries = computed(() => {
           </dl>
         </div>
       </div>
+
+      <h3>Magazine / Puncte de Desfacere</h3>
+      <div class="search-results d-flex flex-wrap"></div>
     </main>
     <FooterNav />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.search-results {
-  margin: 0px -8px;
-  &__items {
-    border: 1px solid $gray-700;
-    border-radius: $res-border-radius-m;
-  }
+.header-imagine-iconica {
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
 }
 .drapel {
   width: 180px;
   img {
     width: 100%;
     height: auto;
+  }
+}
+.search-results {
+  margin: 0px -8px;
+  &__items {
+    border: 1px solid $gray-700;
+    border-radius: $res-border-radius-m;
   }
 }
 </style>

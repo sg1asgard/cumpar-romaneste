@@ -6,7 +6,7 @@ const props = defineProps({
 })
 </script>
 <template>
-  <h1 class="fs-1">{{ props?.title }}</h1>
+  <h1 class="fs-1 text-primary">{{ props?.title }}</h1>
   <h2 class="fs-4 text-gray-700">{{ props?.subtitle }}</h2>
 </template>
 
