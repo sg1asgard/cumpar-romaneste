@@ -40,8 +40,8 @@ const filteredEntries = computed(() => {
   <div class="container-full container-xl">
     <NavBar />
     <PageHeader
-      title="Sustin Producatorii Romani"
-      subtitle="Cumpara de la producatorii Romani si companiile Romanesti cu pachet detinut majoritar sau 100% Romanesc."
+      title="Susține Economia Românească"
+      subtitle="Cumpară de la producătorii Români si companiile Românesti cu pachet deținut majoritar sau 100% Românesc."
     />
     <main>
       <div class="quick-search mt-5 mb-5">
