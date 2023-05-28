@@ -4,6 +4,7 @@ import { apiCalls } from '@/utilities/apiCalls.js'
 import FooterNav from '@/components/shared/FooterNav.vue'
 import PageHeader from '@/components/shared/PageHeader.vue'
 import { getProduse, getDesfacere } from '@/data/doar-romaneste.js'
+import TagEntitati from '@/components/shared/TagEntitati.vue'
 
 // init const
 const { produse } = getProduse()
@@ -14,7 +15,7 @@ const doarDesfacere = ref(desfacere)
 const searchTerm = ref('')
 
 const filteredEntries = computed(() => {
-  let search = searchTerm.value  
+  let search = searchTerm.value
   return doarProduse.value.filter(
     (produs) =>
       produs.denumire.toLowerCase().includes(search.toLowerCase()) ||
@@ -23,7 +24,7 @@ const filteredEntries = computed(() => {
 })
 
 const filteredEntries2 = computed(() => {
-  let search = searchTerm.value  
+  let search = searchTerm.value
   return doarDesfacere.value.filter(
     (item) =>
       item.nume.toLowerCase().includes(search.toLowerCase()) ||
@@ -49,34 +50,38 @@ const filteredEntries2 = computed(() => {
       </div>
     </div>
     <main>
-      <div class="quick-search mt-5 mb-5">
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label fs-4"
-            >Cautare rapida</label
-          >
-          <div class="input-group mb-3">
-            <input
-              v-model="searchTerm"
-              type="text"
-              class="form-control form-control-lg"
-              placeholder="ex: miere lapte Tulcea"
-              aria-label="cauta rapid"
-              aria-describedby="buton-cauta-rapid"
-            />
-            <button
-              @click="generateEntries()"
-              class="btn btn-primary btn-lg text-capitalize"
-              type="button"
-              id="buton-cauta-rapid"
+      <div
+        class="position-relative d-flex flex-row align-items-center justify-content-center rounded-3 overflow-hidden mt-3 mb-5 px-5 quick-search with-bg" style="background-image: url(https://images.unsplash.com/photo-1537532172792-eb2a0eafb811?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2673&q=80)"
+      >
+        <div>
+          <div class="search-box">
+            <label for="exampleFormControlInput1" class="form-label fs-4"
+              >Cautare rapida</label
             >
-              reseteaza cautarea
-            </button>
-          </div>
+            <div class="input-group mb-3 rounded-3">
+              <input
+                v-model="searchTerm"
+                type="text"
+                class="form-control form-control-lg"
+                placeholder="ex: miere lapte Tulcea"
+                aria-label="cauta rapid"
+                aria-describedby="buton-cauta-rapid"
+              />
+              <button
+                @click="searchTerm = ''"
+                class="btn btn-primary btn-lg text-capitalize"
+                type="button"
+                id="buton-cauta-rapid"
+              >
+                Sterge
+              </button>
+            </div>
 
-          <div id="ajutorAautareRapida" class="form-text fs-5">
-            Poti sa cauti dupa numele de producator, produs, locatie sau orice
-            combinatie doresti.
+            <div id="ajutorAautareRapida" class="form-text fs-5 descriere">
+              Poti sa cauti dupa numele de producator, produs sau locatie.
+            </div>
           </div>
+          <div class="floating-overlay"></div>
         </div>
       </div>
 
@@ -88,9 +93,15 @@ const filteredEntries2 = computed(() => {
           class="col-md-3"
         >
           <div class="p-3 mx-2 search-results__items">
-            <div class="mb-2"><span class="tag tag-produs py-1 px-2 rounded-2">{{ produs?.denumire }}</span></div>
+            <div class="mb-3">
+              <TagEntitati tag_type="produs">{{
+                produs?.denumire
+              }}</TagEntitati>
+            </div>
             <div>{{ produs?.brand }}</div>
-            <div>{{ produs?.url }}</div>
+            <div>
+              <a :href="produs?.url" target="_blank">{{ produs?.url }}</a>
+            </div>
           </div>
         </div>
       </div>
@@ -105,9 +116,13 @@ const filteredEntries2 = computed(() => {
           class="col-md-3"
         >
           <div class="p-3 mx-2 search-results__items">
-            <div class="fw-bold">{{ item?.oras }}</div>
+            <div class="mb-3">
+              <TagEntitati tag_type="desfacere">{{ item?.oras }}</TagEntitati>
+            </div>
             <div>{{ item?.nume }}</div>
-            <div><a href="" target="_blank">{{ item?.url }}</a></div>
+            <div>
+              <a :href="item?.url" target="_blank">{{ item?.url }}</a>
+            </div>
           </div>
         </div>
       </div>
@@ -138,10 +153,37 @@ const filteredEntries2 = computed(() => {
     border-radius: $res-border-radius-m;
   }
 }
-.tag {
-  &-produs {
-    background-color: lighten($color: $primary, $amount: 52);
-    font-weight: bold;
+.quick-search {
+  &.with-bg {
+    min-height: 260px;
+    background-size: cover;
+    background-position: center center;
+
+    > div {
+      max-width: 600px;
+    }
+    .search-box {
+      label {
+        color: $gray-300;
+      }
+
+      .descriere {
+        color: $gray-300;
+      }
+    }
+  }
+  .floating-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+  .search-box {
+    position: relative;
+    z-index: 20;
   }
 }
 </style>
