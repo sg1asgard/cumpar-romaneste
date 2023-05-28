@@ -3,34 +3,20 @@ import { ref, reactive, onMounted, watch, computed } from 'vue'
 import { apiCalls } from '@/utilities/apiCalls.js'
 import FooterNav from '@/components/shared/FooterNav.vue'
 import PageHeader from '@/components/shared/PageHeader.vue'
-import { faker } from '@faker-js/faker'
+import { getProduse } from '@/data/doar-romaneste.js'
 
-let randomCompany = faker.company.name()
-let randomProduct = faker.commerce.product()
-
-let entries = ref([])
-const generateEntries = () => {
-  entries.value = []
-  for (let i = 0; i < 100; i++) {
-    entries.value.push({
-      product_name: faker.commerce.product(),
-      company_name: faker.company.name()
-    })
-  }
-}
-
-onMounted(() => {
-  generateEntries()
-})
+// init const
+const { produse } = getProduse()
+const produseNew = ref(produse)
 
 const searchTerm = ref('')
 
 const filteredEntries = computed(() => {
-  let search = searchTerm.value
-  return entries.value.filter(
+  let search = searchTerm.value  
+  return produseNew.value.filter(
     (produs) =>
-      produs.product_name.toLowerCase().includes(search.toLowerCase()) ||
-      produs.company_name.toLowerCase().includes(search.toLowerCase())
+      produs.denumire.toLowerCase().includes(search.toLowerCase()) ||
+      produs.brand.toLowerCase().includes(search.toLowerCase())
   )
 })
 </script>
@@ -76,8 +62,6 @@ const filteredEntries = computed(() => {
             </button>
           </div>
 
-          {{ searchTerm }}
-
           <div id="ajutorAautareRapida" class="form-text fs-5">
             Poti sa cauti dupa numele de producator, produs, locatie sau orice
             combinatie doresti.
@@ -92,10 +76,11 @@ const filteredEntries = computed(() => {
           :key="index"
           class="col-md-3"
         >
-          <dl class="p-3 mx-2 search-results__items">
-            <dt>{{ produs.product_name }}</dt>
-            <dd>{{ produs.company_name }}</dd>
-          </dl>
+          <div class="p-3 mx-2 search-results__items">
+            <div>{{ produs?.denumire }}</div>
+            <div>{{ produs?.brand }}</div>
+            <div>{{ produs?.url }}</div>
+          </div>
         </div>
       </div>
 
@@ -123,6 +108,7 @@ const filteredEntries = computed(() => {
 .search-results {
   margin: 0px -8px;
   &__items {
+    word-wrap: break-word;
     border: 1px solid $gray-700;
     border-radius: $res-border-radius-m;
   }
