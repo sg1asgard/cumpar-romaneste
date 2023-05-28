@@ -4,11 +4,13 @@ import { apiCalls } from '@/utilities/apiCalls.js'
 import FooterNav from '@/components/shared/FooterNav.vue'
 import PageHeader from '@/components/shared/PageHeader.vue'
 import { getProduse, getDesfacere } from '@/data/doar-romaneste.js'
+import { getFotoRomania } from '@/data/foto-romania.js'
 import TagEntitati from '@/components/shared/TagEntitati.vue'
 
 // init const
 const { produse } = getProduse()
 const { desfacere } = getDesfacere()
+const { fotoRomania } = getFotoRomania()
 const doarProduse = ref(produse)
 const doarDesfacere = ref(desfacere)
 
@@ -51,7 +53,8 @@ const filteredEntries2 = computed(() => {
     </div>
     <main>
       <div
-        class="position-relative d-flex flex-row align-items-center justify-content-center rounded-3 overflow-hidden mt-3 mb-5 px-5 quick-search with-bg" style="background-image: url(https://images.unsplash.com/photo-1537532172792-eb2a0eafb811?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2673&q=80)"
+        class="position-relative d-flex flex-row align-items-center justify-content-center rounded-3 overflow-hidden mt-3 px-5 quick-search with-bg"
+        :style="`background-image: url(/foto/${fotoRomania[0].url})`"
       >
         <div>
           <div class="search-box">
@@ -83,6 +86,9 @@ const filteredEntries2 = computed(() => {
           </div>
           <div class="floating-overlay"></div>
         </div>
+      </div>
+      <div class="foto-credit mt-2 mb-5 text-end">
+        <span class="d-inline-block text-gray-700">Fotografie fundal de</span> <a :href="fotoRomania[0].url_autor" target="_blank">{{ fotoRomania[0].autor }}</a>
       </div>
 
       <h3>Produse</h3>
@@ -184,6 +190,9 @@ const filteredEntries2 = computed(() => {
   .search-box {
     position: relative;
     z-index: 20;
+  }
+  .foto-credit {
+    text-align: right;
   }
 }
 </style>
