@@ -9,6 +9,11 @@ const doarRomaneste = {
       denumire: 'Miere',
       brand: 'Apidava',
       url: 'https://www.apidava.ro/'
+    },
+    {
+      denumire: 'iaurt',
+      brand: 'Olymp',
+      url: 'https://www.apidava.ro/'
     }
   ],
   desfacere: [

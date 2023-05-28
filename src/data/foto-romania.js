@@ -20,7 +20,7 @@ const fotoRomania = [
     url_autor: 'https://unsplash.com/@calinstan'
   },
   {
-    url: 'alex-blajan-byqyqkGUerg-unsplash',
+    url: 'alex-blajan-byqyqkGUerg-unsplash.jpg',
     autor: 'Alex Blajan',
     url_autor: 'https://unsplash.com/@alexb'
   }

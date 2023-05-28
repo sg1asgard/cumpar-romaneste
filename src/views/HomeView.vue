@@ -33,6 +33,16 @@ const filteredEntries2 = computed(() => {
       item.oras.toLowerCase().includes(search.toLowerCase())
   )
 })
+
+const arrNumber = ref(0)
+const fotoRandom = () => {
+  let max = fotoRomania.length
+  arrNumber.value = Math.floor(Math.random() * max)
+}
+
+onMounted(() => {
+  fotoRandom()
+})
 </script>
 
 <template>
@@ -54,7 +64,7 @@ const filteredEntries2 = computed(() => {
     <main>
       <div
         class="position-relative d-flex flex-row align-items-center justify-content-center rounded-3 overflow-hidden mt-3 px-5 quick-search with-bg"
-        :style="`background-image: url(/foto/${fotoRomania[0].url})`"
+        :style="`background-image: url(/foto/${fotoRomania[arrNumber].url})`"
       >
         <div>
           <div class="search-box">
@@ -88,7 +98,10 @@ const filteredEntries2 = computed(() => {
         </div>
       </div>
       <div class="foto-credit mt-2 mb-5 text-end">
-        <span class="d-inline-block text-gray-700">Fotografie fundal de</span> <a :href="fotoRomania[0].url_autor" target="_blank">{{ fotoRomania[0].autor }}</a>
+        <span class="d-inline-block text-gray-700 me-2">Fotografie fundal de</span>
+        <a :href="fotoRomania[arrNumber].url_autor" target="_blank">{{
+          fotoRomania[arrNumber].autor
+        }}</a>
       </div>
 
       <h3>Produse</h3>
