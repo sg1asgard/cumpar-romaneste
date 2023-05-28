@@ -3,20 +3,31 @@ import { ref, reactive, onMounted, watch, computed } from 'vue'
 import { apiCalls } from '@/utilities/apiCalls.js'
 import FooterNav from '@/components/shared/FooterNav.vue'
 import PageHeader from '@/components/shared/PageHeader.vue'
-import { getProduse } from '@/data/doar-romaneste.js'
+import { getProduse, getDesfacere } from '@/data/doar-romaneste.js'
 
 // init const
 const { produse } = getProduse()
-const produseNew = ref(produse)
+const { desfacere } = getDesfacere()
+const doarProduse = ref(produse)
+const doarDesfacere = ref(desfacere)
 
 const searchTerm = ref('')
 
 const filteredEntries = computed(() => {
   let search = searchTerm.value  
-  return produseNew.value.filter(
+  return doarProduse.value.filter(
     (produs) =>
       produs.denumire.toLowerCase().includes(search.toLowerCase()) ||
       produs.brand.toLowerCase().includes(search.toLowerCase())
+  )
+})
+
+const filteredEntries2 = computed(() => {
+  let search = searchTerm.value  
+  return doarDesfacere.value.filter(
+    (item) =>
+      item.nume.toLowerCase().includes(search.toLowerCase()) ||
+      item.oras.toLowerCase().includes(search.toLowerCase())
   )
 })
 </script>
@@ -77,15 +88,29 @@ const filteredEntries = computed(() => {
           class="col-md-3"
         >
           <div class="p-3 mx-2 search-results__items">
-            <div>{{ produs?.denumire }}</div>
+            <div class="mb-2"><span class="tag tag-produs py-1 px-2 rounded-2">{{ produs?.denumire }}</span></div>
             <div>{{ produs?.brand }}</div>
             <div>{{ produs?.url }}</div>
           </div>
         </div>
       </div>
 
-      <h3>Magazine / Puncte de Desfacere</h3>
-      <div class="search-results d-flex flex-wrap"></div>
+      <hr class="mt-5" />
+
+      <h3 class="mt-5">Magazine / Puncte de Desfacere</h3>
+      <div class="search-results d-flex flex-wrap">
+        <div
+          v-for="(item, index) in filteredEntries2"
+          :key="index"
+          class="col-md-3"
+        >
+          <div class="p-3 mx-2 search-results__items">
+            <div class="fw-bold">{{ item?.oras }}</div>
+            <div>{{ item?.nume }}</div>
+            <div><a href="" target="_blank">{{ item?.url }}</a></div>
+          </div>
+        </div>
+      </div>
     </main>
     <FooterNav />
   </div>
@@ -111,6 +136,12 @@ const filteredEntries = computed(() => {
     word-wrap: break-word;
     border: 1px solid $gray-700;
     border-radius: $res-border-radius-m;
+  }
+}
+.tag {
+  &-produs {
+    background-color: lighten($color: $primary, $amount: 52);
+    font-weight: bold;
   }
 }
 </style>

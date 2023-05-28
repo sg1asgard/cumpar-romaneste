@@ -36,6 +36,6 @@ export const getProduse = () => {
 }
 
 export const getDesfacere = () => {
-  let desfacere = []
-  return desfacere
+  let desfacere = doarRomaneste.desfacere
+  return { desfacere }
 }
