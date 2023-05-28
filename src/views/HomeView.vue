@@ -1,7 +1,6 @@
 <script setup>
 import { ref, reactive, onMounted, watch, computed } from 'vue'
 import { apiCalls } from '@/utilities/apiCalls.js'
-import NavBar from '@/components/shared/NavBar.vue'
 import FooterNav from '@/components/shared/FooterNav.vue'
 import PageHeader from '@/components/shared/PageHeader.vue'
 import { faker } from '@faker-js/faker'
@@ -38,11 +37,20 @@ const filteredEntries = computed(() => {
 
 <template>
   <div class="container-full container-xl">
-    <NavBar />
-    <PageHeader
-      title="Susține Economia Românească"
-      subtitle="Cumpară de la producătorii Români si companiile Românesti cu pachet deținut majoritar sau 100% Românesc."
-    />
+    <div class="d-flex flex-row mt-5 align-items-top">
+      <div class="flex-fill">
+        <PageHeader
+          title="Susține Economia Românească"
+          subtitle="Cumpară de la producătorii Români si companiile Românesti cu pachet deținut majoritar sau 100% Românesc."
+        />
+      </div>
+      <div class="drapel ps-3">
+        <img
+          src="@/assets/images/drapel_stema_Romaniei.png"
+          alt="Drapel cu Stema Romaniei"
+        />
+      </div>
+    </div>
     <main>
       <div class="quick-search mt-5 mb-5">
         <div class="mb-3">
@@ -100,6 +108,13 @@ const filteredEntries = computed(() => {
   &__items {
     border: 1px solid $gray-700;
     border-radius: $res-border-radius-m;
+  }
+}
+.drapel {
+  width: 180px;
+  img {
+    width: 100%;
+    height: auto;
   }
 }
 </style>
