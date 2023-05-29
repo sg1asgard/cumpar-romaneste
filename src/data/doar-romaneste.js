@@ -14,21 +14,6 @@ const doarRomaneste = {
       denumire: 'iaurt',
       brand: 'Olympus',
       url: 'https://www.iaurtgrecesc.ro/'
-    },
-    {
-      denumire: 'Miere',
-      brand: 'Apicola',
-      url: 'https://www.apicola.ro/produse-apicola'
-    },
-    {
-      denumire: 'Miere',
-      brand: 'Apidava',
-      url: 'https://www.apidava.ro/'
-    },
-    {
-      denumire: 'iaurt',
-      brand: 'Olympus',
-      url: 'https://www.iaurtgrecesc.ro/'
     }
   ],
   desfacere: [
