@@ -47,20 +47,11 @@ onMounted(() => {
 
 <template>
   <div class="container-full container-xl">
-    <div class="d-flex flex-row mt-5 align-items-top">
-      <div class="flex-fill">
-        <PageHeader
-          title="Susține Economia Românească"
-          subtitle="Cumpară de la producătorii Români si companiile Românesti cu pachet deținut majoritar sau 100% Românesc."
-        />
-      </div>
-      <div class="drapel ps-3">
-        <img
-          src="@/assets/images/drapel_stema_Romaniei.png"
-          alt="Drapel cu Stema Romaniei"
-        />
-      </div>
-    </div>
+    <PageHeader
+      title="Susține Economia Românească"
+      subtitle="Cumpară de la producătorii Români si companiile Românesti cu pachet deținut majoritar sau 100% Românesc."
+    />
+
     <main>
       <div
         class="position-relative d-flex flex-row align-items-center justify-content-center rounded-3 overflow-hidden mt-3 px-5 quick-search with-bg"
@@ -98,7 +89,9 @@ onMounted(() => {
         </div>
       </div>
       <div class="foto-credit mt-2 mb-5 text-end">
-        <span class="d-inline-block text-gray-700 me-2">Fotografie fundal de</span>
+        <span class="d-inline-block text-gray-700 me-2"
+          >Fotografie fundal de</span
+        >
         <a :href="fotoRomania[arrNumber].url_autor" target="_blank">{{
           fotoRomania[arrNumber].autor
         }}</a>
@@ -146,6 +139,7 @@ onMounted(() => {
         </div>
       </div>
     </main>
+
     <FooterNav />
   </div>
 </template>
@@ -156,13 +150,6 @@ onMounted(() => {
   height: 300px;
   background-size: cover;
   background-position: center;
-}
-.drapel {
-  width: 180px;
-  img {
-    width: 100%;
-    height: auto;
-  }
 }
 .search-results {
   margin: 0px -8px;
