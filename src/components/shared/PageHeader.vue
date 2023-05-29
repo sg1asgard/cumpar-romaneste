@@ -12,7 +12,7 @@ const props = defineProps({
       <h2 class="fs-4 text-gray-700">{{ props?.subtitle }}</h2>
     </div>
     <div class="drapel ps-3">
-      <RouterLink :to="{ name: 'home' }">
+      <RouterLink :to="{ name: 'acasa' }">
         <img
           src="@/assets/images/drapel_stema_Romaniei.png"
           alt="Drapel cu Stema Romaniei"

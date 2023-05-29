@@ -104,7 +104,7 @@ onMounted(() => {
           :key="index"
           class="col-md-3"
         >
-          <div class="p-3 mx-2 search-results__items">
+          <div class="p-3 m-2 search-results__items">
             <div class="mb-3">
               <TagEntitati tag_type="produs">{{
                 produs?.denumire
@@ -127,7 +127,7 @@ onMounted(() => {
           :key="index"
           class="col-md-3"
         >
-          <div class="p-3 mx-2 search-results__items">
+          <div class="p-3 m-2 search-results__items">
             <div class="mb-3">
               <TagEntitati tag_type="desfacere">{{ item?.oras }}</TagEntitati>
             </div>
@@ -155,6 +155,7 @@ onMounted(() => {
   margin: 0px -8px;
   &__items {
     word-wrap: break-word;
+    word-break: break-all;
     border: 1px solid $gray-700;
     border-radius: $res-border-radius-m;
   }
