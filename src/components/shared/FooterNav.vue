@@ -10,11 +10,17 @@
         <RouterLink :to="{ name: 'cum-ajut' }" class="me-3"
           >Cum ajut?</RouterLink
         >
-        <RouterLink :to="{ name: 'cum-ajut' }" class="me-3"
+        <RouterLink :to="{ name: 'politica-de-confidentialitate' }" class="me-3"
+          >Politica de Confidentialitate</RouterLink
+        >
+        <RouterLink :to="{ name: 'termeni-si-conditii' }" class="me-3"
+          >Termeni si Conditii</RouterLink
+        >
+        <RouterLink :to="{ name: 'politica-de-cookies' }" class="me-3"
           >Politica Cookies</RouterLink
         >
-        <RouterLink :to="{ name: 'cum-ajut' }" class="me-3"
-          >Termeni de Utilizare</RouterLink
+        <RouterLink :to="{ name: 'declinarea-raspunderii' }" class="me-3"
+          >Declinarea Raspunderii</RouterLink
         >
       </div>
     </div>
