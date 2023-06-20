@@ -53,7 +53,7 @@ onMounted(() => {
     />
 
     <main>
-      <div
+      <!-- <div
         class="position-relative d-flex flex-row align-items-center justify-content-center rounded-3 overflow-hidden mt-3 px-5 quick-search with-bg"
         :style="`background-image: url(/foto/${fotoRomania[arrNumber].url})`"
       >
@@ -95,6 +95,40 @@ onMounted(() => {
         <a :href="fotoRomania[arrNumber].url_autor" target="_blank">{{
           fotoRomania[arrNumber].autor
         }}</a>
+      </div> -->
+
+      <div
+        class="position-relative d-flex flex-row align-items-center justify-content-center rounded-3 overflow-hidden mt-3 mb-5 py-4 quick-search with-bg no-photo"
+      >
+        <div>
+          <div class="search-box">
+            <label for="exampleFormControlInput1" class="form-label fs-4"
+              >Cautare rapida</label
+            >
+            <div class="input-group mb-3 rounded-3">
+              <input
+                v-model="searchTerm"
+                type="text"
+                class="form-control form-control-lg"
+                placeholder="ex: miere lapte Tulcea"
+                aria-label="cauta rapid"
+                aria-describedby="buton-cauta-rapid"
+              />
+              <button
+                @click="searchTerm = ''"
+                class="btn btn-primary btn-lg text-capitalize"
+                type="button"
+                id="buton-cauta-rapid"
+              >
+                Sterge
+              </button>
+            </div>
+
+            <div id="ajutorAautareRapida" class="form-text fs-5 descriere">
+              Poti sa cauti dupa numele de producator, produs sau locatie.
+            </div>
+          </div>
+        </div>
       </div>
 
       <h3>Produse</h3>
@@ -162,7 +196,6 @@ onMounted(() => {
 }
 .quick-search {
   &.with-bg {
-    min-height: 260px;
     background-size: cover;
     background-position: center center;
 
@@ -171,11 +204,11 @@ onMounted(() => {
     }
     .search-box {
       label {
-        color: $gray-300;
+        color: $gray-800;
       }
 
       .descriere {
-        color: $gray-300;
+        color: $gray-800;
       }
     }
   }
